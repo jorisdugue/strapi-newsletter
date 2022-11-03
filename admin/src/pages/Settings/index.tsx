@@ -25,11 +25,19 @@ import {
 } from "../../utils/api";
 
 interface DefaultSettings {
+<<<<<<< HEAD
   apiKey?: string;
   apiSecret?: string;
   dc?: string;
   listID?: string;
   formId?: string;
+=======
+  apiKey: string;
+  apiSecret: string;
+  dc: string;
+  listID: string;
+  formId: string;
+>>>>>>> typescript-refactor
 }
 
 const defaultSettings = {
@@ -41,6 +49,7 @@ const defaultSettings = {
 };
 
 const Settings = () => {
+<<<<<<< HEAD
   const [selectedProvider, setSelectedProvider] = React.useState<
     string | undefined
   >();
@@ -50,6 +59,17 @@ const Settings = () => {
   const [successfulMessage, setSuccessfulMessage] = React.useState<
     string | undefined
   >();
+=======
+  const [selectedProvider, setSelectedProvider] = React.useState<string | undefined>(
+    undefined
+  );
+  const [fields, setFields] = React.useState<DefaultSettings>(defaultSettings);
+  const [keys, setKeys] = React.useState<object>({});
+
+  const [successfulMessage, setSuccessfulMessage] = React.useState<
+    string | null
+  >(null);
+>>>>>>> typescript-refactor
   const [isError, setIsError] = React.useState<boolean>(false);
 
   const providers = ["mailchimp", "convertkit"];
@@ -58,7 +78,11 @@ const Settings = () => {
     mailchimp: {
       name: "Mailchimp",
       validator: () => {
+<<<<<<< HEAD
         if (!fields?.apiKey || !fields?.dc || !fields?.listID) {
+=======
+        if (!fields.apiKey || !fields.dc || !fields.listID) {
+>>>>>>> typescript-refactor
           return false;
         }
 
@@ -71,7 +95,11 @@ const Settings = () => {
           setSuccessfulMessage("Connection Successful");
         } catch (error) {
           setIsError(true);
+<<<<<<< HEAD
           setSuccessfulMessage("Connection Unsuccessful");
+=======
+          setSuccessfulMessage(null);
+>>>>>>> typescript-refactor
         }
       },
       renderView: () => (
@@ -87,7 +115,11 @@ const Settings = () => {
                   apiKey: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.apiKey}
+=======
+              value={fields.apiKey}
+>>>>>>> typescript-refactor
               type="password"
             />
           </div>
@@ -103,7 +135,11 @@ const Settings = () => {
                   dc: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.dc}
+=======
+              value={fields.dc}
+>>>>>>> typescript-refactor
             />
           </div>
 
@@ -118,7 +154,11 @@ const Settings = () => {
                   listID: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.listID}
+=======
+              value={fields.listID}
+>>>>>>> typescript-refactor
             />
           </div>
 
@@ -138,7 +178,11 @@ const Settings = () => {
     convertkit: {
       name: "Convert Kit",
       validator: () => {
+<<<<<<< HEAD
         if (!fields?.apiKey || !fields?.apiSecret || !fields?.formId) {
+=======
+        if (!fields.apiKey || !fields.apiSecret || !fields.formId) {
+>>>>>>> typescript-refactor
           return false;
         }
 
@@ -151,7 +195,11 @@ const Settings = () => {
           setSuccessfulMessage("Connection Successful");
         } catch (error) {
           setIsError(true);
+<<<<<<< HEAD
           setSuccessfulMessage("Connection Unsuccessful");
+=======
+          setSuccessfulMessage(null);
+>>>>>>> typescript-refactor
         }
       },
       renderView: () => (
@@ -167,7 +215,11 @@ const Settings = () => {
                   apiKey: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.apiKey}
+=======
+              value={fields.apiKey}
+>>>>>>> typescript-refactor
             />
           </div>
 
@@ -182,7 +234,11 @@ const Settings = () => {
                   apiSecret: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.apiSecret}
+=======
+              value={fields.apiSecret}
+>>>>>>> typescript-refactor
               type="password"
             />
           </div>
@@ -198,7 +254,11 @@ const Settings = () => {
                   formId: e.target.value,
                 }))
               }
+<<<<<<< HEAD
               value={fields?.formId}
+=======
+              value={fields.formId}
+>>>>>>> typescript-refactor
             />
           </div>
         </InputContainer>
@@ -215,12 +275,17 @@ const Settings = () => {
       data: { provider, ...data },
     } = await getSettings();
 
+<<<<<<< HEAD
     // setKeys(data);
+=======
+    setKeys(data);
+>>>>>>> typescript-refactor
     setFields(data);
     setSelectedProvider(provider);
   };
 
   const setUserSettings = async () => {
+<<<<<<< HEAD
     try {
       const { data } = await setSettings({
         ...fields,
@@ -231,6 +296,19 @@ const Settings = () => {
     } catch (error) {
       setIsError(true);
       setSuccessfulMessage("Settings not saved");
+=======
+    const { data } = await setSettings({
+      ...fields,
+      provider: selectedProvider,
+    });
+
+    try {
+      setKeys(data);
+      setSuccessfulMessage("Settings saved successfully");
+    } catch (error) {
+      setIsError(true);
+      setSuccessfulMessage(null);
+>>>>>>> typescript-refactor
     }
   };
 
@@ -248,7 +326,11 @@ const Settings = () => {
             title="Success"
             variant="success"
             onClose={() => {
+<<<<<<< HEAD
               setSuccessfulMessage(undefined);
+=======
+              setSuccessfulMessage(null);
+>>>>>>> typescript-refactor
             }}
           >
             {successfulMessage}
@@ -272,6 +354,7 @@ const Settings = () => {
           <Select
             label="Email Newsletter Provider"
             value={selectedProvider}
+<<<<<<< HEAD
             onChange={
               // (e) => {
               // if (e !== selectedProvider) {
@@ -282,6 +365,16 @@ const Settings = () => {
               setSelectedProvider
               // }
             }
+=======
+            onChange={(e) => {
+              if (e !== selectedProvider) {
+                setFields(defaultSettings);
+              } else {
+                setFields(keys);
+              }
+              setSelectedProvider(e);
+            }}
+>>>>>>> typescript-refactor
           >
             {providers.map((provider) => (
               <Option key={provider} value={provider}>
@@ -303,9 +396,13 @@ const Settings = () => {
             <Button
               onClick={async () => {
                 const validateResponse =
+<<<<<<< HEAD
                   selectedProvider != undefined
                     ? providerFunctions[selectedProvider].validator()
                     : "";
+=======
+                  selectedProvider != undefined ? providerFunctions[selectedProvider].validator() : '';
+>>>>>>> typescript-refactor
 
                 if (!validateResponse) return;
 
@@ -316,11 +413,20 @@ const Settings = () => {
             </Button>
             <Button
               variant="tertiary"
+<<<<<<< HEAD
               disabled={!fields?.apiKey}
               onClick={() => {
                 selectedProvider != undefined
                   ? providerFunctions[selectedProvider].checkConnection()
                   : "";
+=======
+              disabled={
+                Object.entries(keys).length == 0 ||
+                fields.apiKey !== keys.apiKey
+              }
+              onClick={() => {
+                selectedProvider != undefined ? providerFunctions[selectedProvider].checkConnection() : '';
+>>>>>>> typescript-refactor
               }}
             >
               Check Connection
