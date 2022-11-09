@@ -1,6 +1,6 @@
-"use strict";
+import { Strapi } from "@strapi/strapi";
 
-module.exports = {
+export default ({ strapi }: { strapi: Strapi }) => ({
   async checkConnection(ctx) {
     try {
       ctx.body = await strapi
@@ -11,4 +11,4 @@ module.exports = {
       ctx.throw(500, error);
     }
   },
-};
+});

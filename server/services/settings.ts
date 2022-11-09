@@ -26,7 +26,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
     const setup = await pluginStore.get({ key: "settings" });
 
     if (setup && setup.provider) {
-      return setup.provider;
+      return true;
     }
 
     return false;

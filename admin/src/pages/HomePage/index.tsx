@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { useState, memo } from "react";
 import {
   Layout,
   ContentLayout,
@@ -17,20 +17,16 @@ import { getSetup } from "../../utils/api";
 import MainContainer from "./MainContainer";
 
 const HomePage: React.FunctionComponent = () => {
-  const [hasSetup, setHasSetup] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [hasSetup, setHasSetup] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   React.useEffect(() => {
-    const data = async (): Promise<boolean> => {
+    async function getData() {
       const { data } = await getSetup();
 
-      if (data !== null) {
-        return true
-      }
-      return false;
-    };
-
-    setHasSetup(data());
+      setHasSetup(data);
+    }
+    getData();
     setIsLoading(false);
   }, []);
 
