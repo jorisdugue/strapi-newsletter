@@ -60,7 +60,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async sendNewsletter(body, user) {
     try {
       const pluginStore = getPluginStore();
-      const config: ISettings = await pluginStore.get({ key: "settings" });
+      const config = await pluginStore.get({ key: "settings" }) as unknown as ISettings;
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");

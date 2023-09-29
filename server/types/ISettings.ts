@@ -3,5 +3,6 @@ export interface ISettings {
     apiKey: string,
     dc: string,
     listID: string,
-    apiSecret: string
+    apiSecret: string,
+    formId: string
 }
