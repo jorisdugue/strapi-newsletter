@@ -1,4 +1,5 @@
 import { Strapi } from "@strapi/strapi";
+import {ISettings} from "../types/ISettings";
 
 const getPluginStore = () => {
   return strapi.store({
@@ -20,7 +21,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       throw new Error("Email is required");
     }
 
-    const { provider } = await getPluginStore().get({ key: "settings" });
+    const { provider } = await getPluginStore().get({ key: "settings" }) as ISettings;
 
     switch (provider) {
       case "mailchimp": {
@@ -56,7 +57,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       throw new Error("Body and/or Subject are required");
     }
 
-    const { provider } = await getPluginStore().get({ key: "settings" });
+    const { provider } = await getPluginStore().get({ key: "settings" }) as ISettings;
 
     switch (provider) {
       case "mailchimp": {

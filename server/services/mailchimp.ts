@@ -14,7 +14,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async checkConnection() {
     try {
       const pluginStore = getPluginStore();
-      const config: ISettings = await pluginStore.get({ key: "settings" });
+      const config = await pluginStore.get({ key: "settings" }) as unknown as ISettings;
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");
@@ -35,7 +35,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async subscribeNewUser(email) {
     try {
       const pluginStore = getPluginStore();
-      const config: ISettings = await pluginStore.get({ key: "settings" });
+      const config = await pluginStore.get({ key: "settings" }) as unknown as ISettings;
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");
