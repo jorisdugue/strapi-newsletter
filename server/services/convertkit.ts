@@ -1,5 +1,6 @@
 import { Strapi } from "@strapi/strapi";
 import axios, { AxiosRequestConfig } from "axios";
+import {ISettings} from "../types/ISettings";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.convertkit.com/v3",
@@ -17,7 +18,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async checkConnection() {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "convertkit") {
         throw new Error("Provider is not convertkit");
@@ -37,7 +38,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async subscribeNewUser(email) {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "convertkit") {
         throw new Error("Provider is not convertkit");
@@ -60,7 +61,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async sendNewsletter(body, _) {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "convertkit") {
         throw new Error("Provider is not convertkit");

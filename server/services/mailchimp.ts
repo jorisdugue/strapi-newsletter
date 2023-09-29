@@ -1,5 +1,6 @@
 import { Strapi } from "@strapi/strapi";
 import mailchimp from "@mailchimp/mailchimp_marketing";
+import {ISettings} from "../types/ISettings";
 
 const getPluginStore = () => {
   return strapi.store({
@@ -13,7 +14,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async checkConnection() {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");
@@ -34,7 +35,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async subscribeNewUser(email) {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");
@@ -59,7 +60,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
   async sendNewsletter(body, user) {
     try {
       const pluginStore = getPluginStore();
-      const config = await pluginStore.get({ key: "settings" });
+      const config: ISettings = await pluginStore.get({ key: "settings" });
 
       if (config.provider != "mailchimp") {
         throw new Error("Provider is not mailchimp");
